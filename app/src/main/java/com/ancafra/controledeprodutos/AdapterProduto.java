@@ -38,10 +38,10 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         Produto produto = produtoList.get(position);
 
         //exibir as informações em cada intem da lista
-        holder.textProduto.setText(produto.getProduto());
+        holder.textProduto.setText(produto.getNome());
         //quando houver variáves que não forem Strings tem que adcionar o String.valueOf para convertyer o valor para string para ser exibido sem erro
-        holder.textEstoque.setText(String.valueOf(produto.getEstoque()));
-        holder.textValor.setText(String.valueOf(produto.getValor()));
+        holder.textEstoque.setText("Estoque: " + produto.getEstoque());
+        holder.textValor.setText("R$ " + produto.getValor());
 
     }
 

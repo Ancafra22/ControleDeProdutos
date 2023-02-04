@@ -3,25 +3,25 @@ package com.ancafra.controledeprodutos;
 import android.widget.TextView;
 
 public class Produto {
-    private String produto;
+    private String nome;
     private int estoque;
     private double valor;
 
     public Produto() {
     }
 
-    public Produto(String produto, int estoque, double valor) {
-        this.produto = produto;
+    public Produto(String nome, int estoque, double valor) {
+        this.nome = nome;
         this.estoque = estoque;
         this.valor = valor;
     }
 
-    public String getProduto() {
-        return produto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public void setNome(String produto) {
+        this.nome = produto;
     }
 
     public int getEstoque() {
