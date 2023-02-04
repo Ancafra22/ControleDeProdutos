@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
 
     private List<Produto> produtoList = new ArrayList<>();
-    private RecyclerView rvProdutos;
+    private SwipeableRecyclerView rvProdutos;
     private AdapterProduto adapterProduto;
 
     @Override
@@ -76,6 +79,23 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         adapterProduto = new AdapterProduto(produtoList, this);
         //atribuindo o adapter ao recyclerview
         rvProdutos.setAdapter(adapterProduto);
+
+        //implementando o movimento de swipe para a lista onde cada elemento da lista vai deslizar para ser deletado
+        rvProdutos.setListener(new SwipeLeftRightCallback.Listener() {
+            @Override
+            public void onSwipedLeft(int position) {
+
+            }
+
+            @Override
+            public void onSwipedRight(int position) {
+                //removendo o item da lista
+                produtoList.remove(position);
+                //informando o adapter que esse item excluído já não pertence mais a nossa lista, para que ele recarregue alista
+                adapterProduto.notifyItemRemoved(position);
+            }
+        });
+
     }
     //método responsável por executar a sequencia do clique, o que vai acontecer depois do clique
     @Override
