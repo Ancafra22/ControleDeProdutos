@@ -14,10 +14,13 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
 
     //criando a lista que será exibida com os itens do meu produto entre <> coloco a classe que contém os itens, no caso calsse Produto
     private List<Produto> produtoList;
+    //declarrando a interface criada
+    private OnClick onClick;
 
-    //criando o construtor da lista
-    public AdapterProduto(List<Produto> produtoList) {
+    //criando o construtor das variáves declaradas acima
+    public AdapterProduto(List<Produto> produtoList, OnClick onClick) {
         this.produtoList = produtoList;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -43,6 +46,9 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         holder.textEstoque.setText("Estoque: " + produto.getEstoque());
         holder.textValor.setText("R$ " + produto.getValor());
 
+        //cria o evento de clique dentro da lista
+        holder.itemView.setOnClickListener(v -> onClick.onClickListener(produto));
+
     }
 
     // método responsável por mostrar a quantidade de linhas que serão exibidas
@@ -50,6 +56,11 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
     public int getItemCount() {
         //recuperando a lista e retornando para o adapter de acordo com o seu tamanho.
         return produtoList.size();
+    }
+
+    //criando uma interface para o evento de clique no item da lista
+    public interface OnClick{
+        void onClickListener(Produto produto);
     }
 
     //configura quais elementos teremos na nossa listagem, aqui se declara todos os componentes que tem no layout

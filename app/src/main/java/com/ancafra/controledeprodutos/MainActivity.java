@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
 
     private List<Produto> produtoList = new ArrayList<>();
     private RecyclerView rvProdutos;
@@ -71,9 +72,16 @@ public class MainActivity extends AppCompatActivity {
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         //deixa o recycleview mais performático
         rvProdutos.setHasFixedSize(true);
-        //instanciando o adapter com lista de produto passada no construtor
-        adapterProduto = new AdapterProduto(produtoList);
+        //instanciando o adapter com lista de produto e demais parâmetros passados no construtor
+        adapterProduto = new AdapterProduto(produtoList, this);
         //atribuindo o adapter ao recyclerview
         rvProdutos.setAdapter(adapterProduto);
+    }
+    //método responsável por executar a sequencia do clique, o que vai acontecer depois do clique
+    @Override
+    public void onClickListener(Produto produto) {
+        //neste caso exibir um toast com o nome do produto clicado
+        Toast.makeText(this, "O produto clicado foi: "+produto.getNome(), Toast.LENGTH_SHORT).show();
+
     }
 }
