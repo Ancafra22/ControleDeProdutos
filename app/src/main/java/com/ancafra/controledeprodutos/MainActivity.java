@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
         rvProdutos = findViewById(R.id.rv_produtos);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Controle de produtos");
-        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         setSupportActionBar(toolbar);
 
         carregaLista();
