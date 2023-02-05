@@ -1,5 +1,6 @@
 package com.ancafra.controledeprodutos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
@@ -116,5 +118,18 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         //neste caso exibir um toast com o nome do produto clicado
         Toast.makeText(this, "O produto clicado foi: "+produto.getNome(), Toast.LENGTH_SHORT).show();
 
+    }
+
+    //método responsável pelo evento de clique dos itens do menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //recuperando o id do menu
+        int idMenu = item.getItemId();
+        if(idMenu == R.id.menu_add){
+            Toast.makeText(this, "ADD acionado!", Toast.LENGTH_SHORT).show();
+        }else if (idMenu == R.id.menu_sobre){
+            Toast.makeText(this, "Sobre acionado!", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }
