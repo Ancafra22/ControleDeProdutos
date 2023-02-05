@@ -1,9 +1,11 @@
 package com.ancafra.controledeprodutos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         setContentView(R.layout.activity_main);
 
         rvProdutos = findViewById(R.id.rv_produtos);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Controle de produtos");
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
         carregaLista();
         configRecycleView();
