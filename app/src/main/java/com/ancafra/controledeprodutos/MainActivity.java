@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
@@ -30,9 +32,17 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Controle de produtos");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        setSupportActionBar(toolbar);
 
         carregaLista();
         configRecycleView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_toolbar, menu);
+        return true;
     }
 
     private void carregaLista() {

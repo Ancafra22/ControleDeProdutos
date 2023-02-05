@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="actionOverflowButtonStyle">@style/StyleToolbal</item>
+    </style>
+    <style name="StyleToolbal" parent="Widget.AppCompat.ActionButton">
+        <item name="android:tint">#ffffff</item>
     </style>
 </resources>
