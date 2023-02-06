@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.progressindicator.BaseProgressIndicator;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rvProdutos = findViewById(R.id.rv_produtos);
+        rvProdutos = findViewById(R.id.rvProdutos);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

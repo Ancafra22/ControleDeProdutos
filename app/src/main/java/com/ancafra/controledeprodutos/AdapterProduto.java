@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ancafra.controledeprodutos.databinding.ItemProdutoBinding;
+
 import java.util.List;
 
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHolder> {
@@ -27,11 +29,9 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
     @Override
     //método responsável por exibir o layout
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //criando variável do tipo View para receber o meu layout
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_produto, parent, false);
-
-        //reornar o meu myViewHolder passando o meu iteView
-        return new MyViewHolder(itemView);
+        return new MyViewHolder(
+              ItemProdutoBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)
+        );
     }
 
     //método responsável por configurar as informações da linha da lista de acordo cam as informações necessárias
@@ -41,10 +41,10 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         Produto produto = produtoList.get(position);
 
         //exibir as informações em cada intem da lista
-        holder.textProduto.setText(produto.getNome());
+        holder.binding.textProduto.setText(produto.getNome());
         //quando houver variáves que não forem Strings tem que adcionar o String.valueOf para convertyer o valor para string para ser exibido sem erro
-        holder.textEstoque.setText("Estoque: " + produto.getEstoque());
-        holder.textValor.setText("R$ " + produto.getValor());
+        holder.binding.textEstoque.setText("Estoque: " + produto.getEstoque());
+        holder.binding.textValor.setText("R$ " + produto.getValor());
 
         //cria o evento de clique dentro da lista
         holder.itemView.setOnClickListener(v -> onClick.onClickListener(produto));
@@ -65,16 +65,13 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
 
     //configura quais elementos teremos na nossa listagem, aqui se declara todos os componentes que tem no layout
     static class MyViewHolder extends RecyclerView.ViewHolder{
-        //declarando os componentes que terão no layout
-        TextView textProduto;
-        TextView textEstoque;
-        TextView textValor;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            //referenciando os itens declarados acima passando a minha view que no caso é itemView que é o layout que contém as informações a serem exibidas
-            textProduto = itemView.findViewById(R.id.text_produto);
-            textEstoque = itemView.findViewById(R.id.text_estoque);
-            textValor = itemView.findViewById(R.id.text_valor);
+
+        private ItemProdutoBinding binding;
+
+        public MyViewHolder(ItemProdutoBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
         }
     }
 }
