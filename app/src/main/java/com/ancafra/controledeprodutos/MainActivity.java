@@ -1,103 +1,111 @@
 package com.ancafra.controledeprodutos;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.progressindicator.BaseProgressIndicator;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
+public class MainActivity extends AppCompatActivity implements AdapterProduct.OnClick {
 
-    private List<Produto> produtoList = new ArrayList<>();
-    private SwipeableRecyclerView rvProdutos;
-    private AdapterProduto adapterProduto;
+    private List<Product> productList = new ArrayList<>();
+    private SwipeableRecyclerView rvProduct;
+    private AdapterProduct adapterProduct;
+    private TextView textTitle;
+    private ImageButton ibAdd;
+    private ImageButton ibMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rvProdutos = findViewById(R.id.rvProdutos);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        carregaLista();
+        initComponents();
+        listLoading();
         configRecycleView();
+        clickListener();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_toolbar, menu);
-        return true;
+    private void clickListener() {
+        ibAdd.setOnClickListener(v -> {
+            startActivity(new Intent(this, FormProductActivity.class));
+        });
+        ibMenu.setOnClickListener(v -> {
+            PopupMenu popupMenu  = new PopupMenu(this, ibMenu);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_toolbar, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if(menuItem.getItemId() == R.id.menuAbout) {
+                    Toast.makeText(this, "Você clicou no botão sobre", Toast.LENGTH_SHORT).show();
+
+                }
+                return true;
+            });
+            popupMenu.show();
+        });
     }
 
-    private void carregaLista() {
-        Produto produto1 = new Produto();
-        produto1.setNome("Monitor 34 LG");
-        produto1.setEstoque(45);
-        produto1.setValor(1349.99);
+    private void listLoading() {
+        Product produto1 = new Product();
+        produto1.setName("Monitor 34 LG");
+        produto1.setQuantity(45);
+        produto1.setValue(1349.99);
 
-        Produto produto2 = new Produto();
-        produto2.setNome("Caixa de Som C3 Tech");
-        produto2.setEstoque(15);
-        produto2.setValor(149.99);
+        Product produto2 = new Product();
+        produto2.setName("Caixa de Som C3 Tech");
+        produto2.setQuantity(15);
+        produto2.setValue(149.99);
 
-        Produto produto3 = new Produto();
-        produto3.setNome("Microfone Blue yeti");
-        produto3.setEstoque(38);
-        produto3.setValor(1699.99);
+        Product produto3 = new Product();
+        produto3.setName("Microfone Blue yeti");
+        produto3.setQuantity(38);
+        produto3.setValue(1699.99);
 
-        Produto produto4 = new Produto();
-        produto4.setNome("Gabinete NZXT H440");
-        produto4.setEstoque(15);
-        produto4.setValor(979.99);
+        Product produto4 = new Product();
+        produto4.setName("Gabinete NZXT H440");
+        produto4.setQuantity(15);
+        produto4.setValue(979.99);
 
-        Produto produto5 = new Produto();
-        produto5.setNome("Placa Mãe Asus");
-        produto5.setEstoque(60);
-        produto5.setValor(1199.99);
+        Product produto5 = new Product();
+        produto5.setName("Placa Mãe Asus");
+        produto5.setQuantity(60);
+        produto5.setValue(1199.99);
 
-        Produto produto6 = new Produto();
-        produto6.setNome("Memória Corsair 16GB");
-        produto6.setEstoque(44);
-        produto6.setValor(599.99);
+        Product produto6 = new Product();
+        produto6.setName("Memória Corsair 16GB");
+        produto6.setQuantity(44);
+        produto6.setValue(599.99);
 
-        produtoList.add(produto1);
-        produtoList.add(produto2);
-        produtoList.add(produto3);
-        produtoList.add(produto4);
-        produtoList.add(produto5);
-        produtoList.add(produto6);
+        productList.add(produto1);
+        productList.add(produto2);
+        productList.add(produto3);
+        productList.add(produto4);
+        productList.add(produto5);
+        productList.add(produto6);
     }
 
     //criação do método responsável por receber o padrão de layout e setar o recyclerView e instanciar o adapter
     private void configRecycleView() {
         //indicando para o recycleview que ele vai receber um linear layout
-        rvProdutos.setLayoutManager(new LinearLayoutManager(this));
+        rvProduct.setLayoutManager(new LinearLayoutManager(this));
         //deixa o recycleview mais performático
-        rvProdutos.setHasFixedSize(true);
+        rvProduct.setHasFixedSize(true);
         //instanciando o adapter com lista de produto e demais parâmetros passados no construtor
-        adapterProduto = new AdapterProduto(produtoList, this);
+        adapterProduct = new AdapterProduct(productList, this);
         //atribuindo o adapter ao recyclerview
-        rvProdutos.setAdapter(adapterProduto);
+        rvProduct.setAdapter(adapterProduct);
 
         //implementando o movimento de swipe para a lista onde cada elemento da lista vai deslizar para ser deletado
-        rvProdutos.setListener(new SwipeLeftRightCallback.Listener() {
+        rvProduct.setListener(new SwipeLeftRightCallback.Listener() {
             @Override
             public void onSwipedLeft(int position) {
 
@@ -106,31 +114,25 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             @Override
             public void onSwipedRight(int position) {
                 //removendo o item da lista
-                produtoList.remove(position);
+                productList.remove(position);
                 //informando o adapter que esse item excluído já não pertence mais a nossa lista, para que ele recarregue alista
-                adapterProduto.notifyItemRemoved(position);
+                adapterProduct.notifyItemRemoved(position);
             }
         });
 
     }
     //método responsável por executar a sequencia do clique, o que vai acontecer depois do clique
     @Override
-    public void onClickListener(Produto produto) {
+    public void onClickListener(Product produto) {
         //neste caso exibir um toast com o nome do produto clicado
-        Toast.makeText(this, "O produto clicado foi: "+produto.getNome(), Toast.LENGTH_SHORT).show();
 
     }
 
-    //método responsável pelo evento de clique dos itens do menu
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //recuperando o id do menu
-        int idMenu = item.getItemId();
-        if(idMenu == R.id.menu_add){
-            Toast.makeText(this, "ADD acionado!", Toast.LENGTH_SHORT).show();
-        }else if (idMenu == R.id.menu_sobre){
-            Toast.makeText(this, "Sobre acionado!", Toast.LENGTH_SHORT).show();
-        }
-        return true;
+    private void initComponents() {
+        rvProduct = findViewById(R.id.rvProduct);
+        textTitle = findViewById(R.id.textTitulo);
+        textTitle.setText("Product control");
+        ibMenu = findViewById(R.id.ibMenu);
+        ibAdd = findViewById(R.id.ibAdd);
     }
 }
