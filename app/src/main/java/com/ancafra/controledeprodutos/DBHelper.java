@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
     private static final String NAME_DB = "DB_APP";
-    private static final String TB_PRODUCT = "TB_PRODUCT";
+    public static final String TB_PRODUCT = "TB_PRODUCT";
 
     public DBHelper(@Nullable Context context) {
         super(context, NAME_DB, null, VERSION);
@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT,  "
                 + " name TEXT NOT NULL, "
                 + " stock INTEGER NOT NULL, "
-                + " VALUE DOUBLE NOT NULL); ";
+                + " value DOUBLE NOT NULL); ";
 
         try {
             db.execSQL(sql);

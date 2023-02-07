@@ -12,7 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FormProductActivity extends AppCompatActivity {
-    private TextView textTitulo;
+
+    private ProductDAO productDAO;
+
+    private TextView textTitle;
     private ImageButton ibAdd;
     private EditText edtProduct;
     private EditText edtQuantity;
@@ -23,12 +26,14 @@ public class FormProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_produto);
 
+        productDAO = new ProductDAO(this);
+
         initComponents();
     }
 
     private void initComponents() {
-        textTitulo = findViewById(R.id.textTitulo);
-        textTitulo.setText("Products registration");
+        textTitle = findViewById(R.id.textTitle);
+        textTitle.setText("Products registration");
         ibAdd = findViewById(R.id.ibBack);
         ibAdd.setOnClickListener(v -> finish());
         edtProduct = findViewById(R.id.edtProduct);
@@ -37,11 +42,11 @@ public class FormProductActivity extends AppCompatActivity {
     }
 
     public void saveProduct(View view) {
-        String product = edtProduct.getText().toString();
+        String name = edtProduct.getText().toString();
         String quantity = edtQuantity.getText().toString();
         String value = edtValue.getText().toString();
 
-        if (!product.isEmpty()) {
+        if (!name.isEmpty()) {
             if (!quantity.isEmpty()) {
                 int qtt = Integer.parseInt(quantity);
                 if (qtt >= 1) {
@@ -50,7 +55,12 @@ public class FormProductActivity extends AppCompatActivity {
                         if(vl > 0) {
 
                             hideKeyboard();
-                            Toast.makeText(this, "It's ok here", Toast.LENGTH_SHORT).show();
+                            Product product = new Product();
+                            product.setName(name);
+                            product.setQuantity(Integer.parseInt(quantity));
+                            product.setValue(Double.parseDouble(value));
+
+                            productDAO.saveProduct(product);
 
                         }else {
                             edtValue.requestFocus();
