@@ -75,4 +75,15 @@ public class ProductDAO {
             Log.i("ERROR", "Error update product!" + e.getMessage());
         }
     }
+
+    public void deleteProduct(Product product){
+        String[] args = {String.valueOf(product.getId())};
+        write.delete(DBHelper.TB_PRODUCT, "id=?", args);
+        try {
+
+        }catch (Exception e) {
+            Log.i("ERROR", "Error update product!" + e.getMessage());
+        }
+
+    }
 }
