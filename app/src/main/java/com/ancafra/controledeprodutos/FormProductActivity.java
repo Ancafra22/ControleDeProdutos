@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class FormProductActivity extends AppCompatActivity {
 
     private ProductDAO productDAO;
+    private Product product;
 
     private TextView textTitle;
     private ImageButton ibAdd;
@@ -29,6 +30,18 @@ public class FormProductActivity extends AppCompatActivity {
         productDAO = new ProductDAO(this);
 
         initComponents();
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            product = (Product) bundle.getSerializable("product");
+            editProduct();
+        }
+    }
+
+    private void editProduct() {
+        edtProduct.setText(product.getName());
+        edtQuantity.setText(String.valueOf(product.getQuantity()));
+        edtValue.setText(String.valueOf(product.getValue()));
     }
 
     private void initComponents() {
@@ -55,12 +68,16 @@ public class FormProductActivity extends AppCompatActivity {
                         if(vl > 0) {
 
                             hideKeyboard();
-                            Product product = new Product();
+                            if(product == null) product = new Product();
                             product.setName(name);
                             product.setQuantity(Integer.parseInt(quantity));
                             product.setValue(Double.parseDouble(value));
 
-                            productDAO.saveProduct(product);
+                            if(product.getId() != 0){
+                                productDAO.updateProduct(product);
+                            }else {
+                                productDAO.saveProduct(product);
+                            }
 
                             finish();
 

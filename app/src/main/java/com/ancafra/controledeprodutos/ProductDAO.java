@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,5 +57,22 @@ public class ProductDAO {
         }
 
         return productList;
+    }
+
+    public void updateProduct(Product product) {
+        ContentValues cv = new ContentValues();
+        cv.put("name", product.getName());
+        cv.put("stock", product.getQuantity());
+        cv.put("value", product.getValue());
+
+        String where = "id=?";
+        String[] args = {String.valueOf(product.getId())};
+
+        try {
+            write.update(DBHelper.TB_PRODUCT, cv, where, args);
+            write.close();
+        }catch (Exception e) {
+            Log.i("ERROR", "Error update product!" + e.getMessage());
+        }
     }
 }

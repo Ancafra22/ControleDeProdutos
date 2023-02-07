@@ -85,8 +85,11 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
     }
     //método responsável por executar a sequencia do clique, o que vai acontecer depois do clique
     @Override
-    public void onClickListener(Product produto) {
-        //neste caso exibir um toast com o nome do produto clicado
+    public void onClickListener(Product product) {
+        //neste caso vai abrir a activity de formulário para editar o produto
+        Intent intent = new Intent(this, FormProductActivity.class);
+        intent.putExtra("product", product);
+        startActivity(intent);
 
     }
 
