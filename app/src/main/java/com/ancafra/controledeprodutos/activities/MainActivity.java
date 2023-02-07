@@ -1,4 +1,4 @@
-package com.ancafra.controledeprodutos;
+package com.ancafra.controledeprodutos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ancafra.controledeprodutos.adapter.AdapterProduct;
+import com.ancafra.controledeprodutos.model.Product;
+import com.ancafra.controledeprodutos.ProductDAO;
+import com.ancafra.controledeprodutos.R;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 

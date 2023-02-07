@@ -1,4 +1,4 @@
-package com.ancafra.controledeprodutos;
+package com.ancafra.controledeprodutos.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ancafra.controledeprodutos.databinding.ItemProductBinding;
+import com.ancafra.controledeprodutos.model.Product;
 
 import java.util.List;
 

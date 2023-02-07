@@ -1,4 +1,4 @@
-package com.ancafra.controledeprodutos;
+package com.ancafra.controledeprodutos.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.ancafra.controledeprodutos;
+package com.ancafra.controledeprodutos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.ancafra.controledeprodutos.model.Product;
+import com.ancafra.controledeprodutos.ProductDAO;
+import com.ancafra.controledeprodutos.R;
 
 public class FormProductActivity extends AppCompatActivity {
 
