@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ancafra.controledeprodutos.model.Product;
@@ -24,6 +25,7 @@ public class FormProductActivity extends AppCompatActivity {
     private EditText edtProduct;
     private EditText edtQuantity;
     private EditText edtValue;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class FormProductActivity extends AppCompatActivity {
         edtProduct = findViewById(R.id.edtProduct);
         edtQuantity = findViewById(R.id.edtQuantity);
         edtValue = findViewById(R.id.edtValue);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     public void saveProduct(View view) {

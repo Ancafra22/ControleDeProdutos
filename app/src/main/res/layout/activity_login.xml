@@ -81,10 +81,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Create account"
+                    android:onClick=""
                     android:textColor="@android:color/white" />
 
                 <TextView
-                    android:id="@+id/text_retrieve"
+                    android:id="@+id/textRetrieve"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

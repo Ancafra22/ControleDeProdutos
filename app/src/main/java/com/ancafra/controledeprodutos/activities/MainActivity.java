@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
 
     private void initComponents() {
         rvProduct = findViewById(R.id.rvProduct);
-        textTitle = findViewById(R.id.textTitulo);
+        textTitle = findViewById(R.id.textTitle);
         textTitle.setText("Product control");
         ibMenu = findViewById(R.id.ibMenu);
         ibAdd = findViewById(R.id.ibAdd);
