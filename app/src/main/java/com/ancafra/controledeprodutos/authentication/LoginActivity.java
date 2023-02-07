@@ -2,9 +2,11 @@ package com.ancafra.controledeprodutos.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         if (!email.isEmpty()) {
             if (!password.isEmpty()) {
 
+                hideKeyboard();
+
             } else {
                 editPassword.requestFocus();
                 editPassword.setError("required focus");
@@ -58,5 +62,11 @@ public class LoginActivity extends AppCompatActivity {
         textCreateAccount = findViewById(R.id.textCreateAccount);
         textRetrieve = findViewById(R.id.textRetrieve);
         progressBar = findViewById(R.id.progressBar);
+    }
+
+    private void hideKeyboard() {
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                editEmail.getWindowToken(), 0
+        );
     }
 }

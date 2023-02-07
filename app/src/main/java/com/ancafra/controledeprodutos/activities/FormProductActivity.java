@@ -37,7 +37,7 @@ public class FormProductActivity extends AppCompatActivity {
         initComponents();
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             product = (Product) bundle.getSerializable("product");
             editProduct();
         }
@@ -71,23 +71,23 @@ public class FormProductActivity extends AppCompatActivity {
                 if (qtt >= 1) {
                     if (!value.isEmpty()) {
                         double vl = Double.parseDouble(value);
-                        if(vl > 0) {
+                        if (vl > 0) {
 
                             hideKeyboard();
-                            if(product == null) product = new Product();
+                            if (product == null) product = new Product();
                             product.setName(name);
                             product.setQuantity(Integer.parseInt(quantity));
                             product.setValue(Double.parseDouble(value));
 
-                            if(product.getId() != 0){
+                            if (product.getId() != 0) {
                                 productDAO.updateProduct(product);
-                            }else {
+                            } else {
                                 productDAO.saveProduct(product);
                             }
 
                             finish();
 
-                        }else {
+                        } else {
                             edtValue.requestFocus();
                             edtValue.setError("Invalid value");
                         }
