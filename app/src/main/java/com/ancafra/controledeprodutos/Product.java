@@ -1,6 +1,8 @@
 package com.ancafra.controledeprodutos;
 
 public class Product {
+
+    private int id;
     private String name;
     private int quantity;
     private double value;
@@ -8,10 +10,19 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, int quantity, double value) {
+    public Product(int id, String name, int quantity, double value) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.value = value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

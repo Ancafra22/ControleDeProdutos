@@ -62,6 +62,8 @@ public class FormProductActivity extends AppCompatActivity {
 
                             productDAO.saveProduct(product);
 
+                            finish();
+
                         }else {
                             edtValue.requestFocus();
                             edtValue.setError("Invalid value");

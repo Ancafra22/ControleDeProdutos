@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduct.OnClick {
 
-    private List<Product> productList = new ArrayList<>();
+    private ProductDAO productDAO;
     private SwipeableRecyclerView rvProduct;
     private AdapterProduct adapterProduct;
     private TextView textTitle;
@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        productDAO = new ProductDAO(this);
+
         initComponents();
-        listLoading();
         configRecycleView();
         clickListener();
     }
@@ -54,45 +55,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
         });
     }
 
-    private void listLoading() {
-        Product produto1 = new Product();
-        produto1.setName("Monitor 34 LG");
-        produto1.setQuantity(45);
-        produto1.setValue(1349.99);
-
-        Product produto2 = new Product();
-        produto2.setName("Caixa de Som C3 Tech");
-        produto2.setQuantity(15);
-        produto2.setValue(149.99);
-
-        Product produto3 = new Product();
-        produto3.setName("Microfone Blue yeti");
-        produto3.setQuantity(38);
-        produto3.setValue(1699.99);
-
-        Product produto4 = new Product();
-        produto4.setName("Gabinete NZXT H440");
-        produto4.setQuantity(15);
-        produto4.setValue(979.99);
-
-        Product produto5 = new Product();
-        produto5.setName("Placa Mãe Asus");
-        produto5.setQuantity(60);
-        produto5.setValue(1199.99);
-
-        Product produto6 = new Product();
-        produto6.setName("Memória Corsair 16GB");
-        produto6.setQuantity(44);
-        produto6.setValue(599.99);
-
-        productList.add(produto1);
-        productList.add(produto2);
-        productList.add(produto3);
-        productList.add(produto4);
-        productList.add(produto5);
-        productList.add(produto6);
-    }
-
     //criação do método responsável por receber o padrão de layout e setar o recyclerView e instanciar o adapter
     private void configRecycleView() {
         //indicando para o recycleview que ele vai receber um linear layout
@@ -100,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
         //deixa o recycleview mais performático
         rvProduct.setHasFixedSize(true);
         //instanciando o adapter com lista de produto e demais parâmetros passados no construtor
-        adapterProduct = new AdapterProduct(productList, this);
+        adapterProduct = new AdapterProduct(productDAO.getListProduct(), this);
         //atribuindo o adapter ao recyclerview
         rvProduct.setAdapter(adapterProduct);
 
@@ -114,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.On
             @Override
             public void onSwipedRight(int position) {
                 //removendo o item da lista
-                productList.remove(position);
+                productDAO.getListProduct().remove(position);
                 //informando o adapter que esse item excluído já não pertence mais a nossa lista, para que ele recarregue alista
                 adapterProduct.notifyItemRemoved(position);
             }

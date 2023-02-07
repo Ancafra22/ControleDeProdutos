@@ -1,9 +1,14 @@
 package com.ancafra.controledeprodutos;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO {
 
@@ -24,9 +29,32 @@ public class ProductDAO {
 
         try {
             write.insert(DBHelper.TB_PRODUCT, null, cv);
-            //write.close();
+            write.close();
         }catch (Exception e) {
             Log.i("ERROR", "Error saving product!" + e.getMessage());
         }
+    }
+
+    public List<Product> getListProduct() {
+        List<Product> productList = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DBHelper.TB_PRODUCT + ";";
+        Cursor c = read.rawQuery(sql, null);
+
+        while(c.moveToNext()) {
+            @SuppressLint("Range") int id = c.getInt(c.getColumnIndex("id"));
+            @SuppressLint("Range")String name = c.getString(c.getColumnIndex("name"));
+            @SuppressLint("Range") int stock = c.getInt(c.getColumnIndex("stock"));
+            @SuppressLint("Range") double value = c.getDouble(c.getColumnIndex("value"));
+
+            Product product = new Product();
+            product.setId(id);
+            product.setName(name);
+            product.setQuantity(stock);
+            product.setValue(value);
+            productList.add(product);
+        }
+
+        return productList;
     }
 }
