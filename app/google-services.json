@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "493343446072",
+    "project_id": "controle-de-estoque-ddb4d",
+    "storage_bucket": "controle-de-estoque-ddb4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493343446072:android:21a97ac2897c3ca71882cd",
+        "android_client_info": {
+          "package_name": "com.ancafra.controledeprodutos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493343446072-ct0gdv4krqu4p66qe2qsranjcqsid19v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ancafra.controledeprodutos",
+            "certificate_hash": "2c72557d0e3e8ba03ff327ee75f497306bf4fc0f"
+          }
+        },
+        {
+          "client_id": "493343446072-injjd4ud1oc4ih61c49hd8ccrk424v80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASimVBl0Yc4NgSu7BL2-vr97vf-46ka5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493343446072-injjd4ud1oc4ih61c49hd8ccrk424v80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
